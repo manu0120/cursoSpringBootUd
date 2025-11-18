@@ -6,7 +6,7 @@ Este documento resume las anotaciones de Spring utilizadas en los controladores 
 
 *   `@RestController`:
     *   **Uso**: Se utiliza en clases para marcar un controlador donde cada método devuelve directamente un objeto de dominio en lugar de una vista. Es una combinación de `@Controller` y `@ResponseBody`.
-    *   **Ejemplo**: `[UserRestController.java](https://github.com/manu0120/cursoSpringBootUd/blob/master/src/main/java/com/manuel/springboot/webapp/springboot_web/controllers/UserRestController.java)`, `[RequestParamController.java](https://github.com/manu0120/cursoSpringBootUd/blob/master/src/main/java/com/manuel/springboot/webapp/springboot_web/controllers/RequestParamController.java)`, `[PathVariableController.java](https://github.com/manu0120/cursoSpringBootUd/blob/master/src/main/java/com/manuel/springboot/webapp/springboot_web/controllers/PathVariableController.java)`
+    *   **Ejemplo**: `[UserRestController.java]([https://github.com/manu0120/cursoSpringBootUd/blob/master/src/main/java/com/manuel/springboot/webapp/springboot_web/controllers/UserRestController.java](https://github.com/manu0120/cursoSpringBootUd/edit/master/PrimerProyecto/springboot-web/annotations_summary.md))`, `[RequestParamController.java](https://github.com/manu0120/cursoSpringBootUd/blob/master/src/main/java/com/manuel/springboot/webapp/springboot_web/controllers/RequestParamController.java)`, `[PathVariableController.java](https://github.com/manu0120/cursoSpringBootUd/blob/master/src/main/java/com/manuel/springboot/webapp/springboot_web/controllers/PathVariableController.java)`
 
 *   `@Controller`:
     *   **Uso**: Indica que una clase es un controlador de Spring MVC. Se utiliza para manejar solicitudes web y devolver vistas o datos.
