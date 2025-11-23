@@ -8,6 +8,10 @@ import com.manuel.springboot.webapp.springboot_web.models.dto.ParamMixDto;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -15,6 +19,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RestController
 @RequestMapping("/api/params")
 public class RequestParamController {
+
+    @Value("${config.username}")
+    private String userName;
+    @Value("${config.message}")
+    private String message;
+    @Value("${config.listOfValues}")
+    private String[] listOfValues;
+    @Value("${config.code}")
+    private Integer code;
+
     @GetMapping("/foo")
     // es opcional usar required = false, por defecto es true
     public ParamMixDto foo(@RequestParam(required = false, defaultValue = "No hay mensaje como parámetro") String mensaje) {
@@ -47,6 +61,17 @@ public class RequestParamController {
         params.setMessage(request.getParameter("message"));
         params.setCode(code);
         return params;
+    }
+
+    @GetMapping("/values")
+    public Map<String, Object> values(@RequestParam String param) {
+        Map<String, Object> object = new LinkedHashMap<>();
+        object.put("parametro", param);
+        object.put("username", userName);
+        object.put("message", message);
+        object.put("listOfValues", listOfValues);
+        object.put("code", code);
+        return object;
     }
     
 }

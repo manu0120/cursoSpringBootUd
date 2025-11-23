@@ -3,7 +3,6 @@ package com.manuel.springboot.webapp.springboot_web.controllers;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.manuel.springboot.webapp.springboot_web.models.User;
-import com.manuel.springboot.webapp.springboot_web.models.dto.ParamDto;
 import com.manuel.springboot.webapp.springboot_web.models.dto.ParamMixDto;
 
 import java.util.LinkedHashMap;
@@ -15,11 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
-
 @RestController
 @RequestMapping("/api/path-variable")
 public class PathVariableController {
+
     @GetMapping("/baz/{param}")
     // podría ser también: @PathVariable(name="param") String paramAux
     public ParamMixDto getMethodName(@PathVariable String param) {
@@ -34,7 +32,7 @@ public class PathVariableController {
         object.put("product", product);
         object.put("id", id);
         return object;
-    }
+    }    
 
     /* -------------------------------------------------------------
      Métodos POST */
