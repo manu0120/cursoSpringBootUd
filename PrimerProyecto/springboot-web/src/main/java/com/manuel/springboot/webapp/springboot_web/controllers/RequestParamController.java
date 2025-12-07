@@ -22,8 +22,8 @@ public class RequestParamController {
 
     @Value("${config.username}")
     private String userName;
-    @Value("${config.message}")
-    private String message;
+    // @Value("${config.message}")
+    // private String message;
     @Value("${config.listOfValues}")
     private String[] listOfValues;
     @Value("${config.code}")
@@ -64,7 +64,7 @@ public class RequestParamController {
     }
 
     @GetMapping("/values")
-    public Map<String, Object> values(@RequestParam String param) {
+    public Map<String, Object> values(@RequestParam String param, @Value("${config.message}") String message) {
         Map<String, Object> object = new LinkedHashMap<>();
         object.put("parametro", param);
         object.put("username", userName);
