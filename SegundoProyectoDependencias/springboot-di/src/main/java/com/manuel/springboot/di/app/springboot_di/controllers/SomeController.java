@@ -2,14 +2,14 @@ package com.manuel.springboot.di.app.springboot_di.controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.manuel.springboot.di.app.springboot_di.models.Product;
-import com.manuel.springboot.di.app.springboot_di.services.ProductService;
-import org.springframework.web.bind.annotation.RequestParam;
+import com.manuel.springboot.di.app.springboot_di.services.ProductServiceImpl;
 
 
 @RestController
@@ -21,7 +21,10 @@ public class SomeController {
      * resetear. Cada vez que se llame va a ir sumando el impuesto al precio de cada producto. Se tendría que 
      * aplicar el impuesto sobre el precio base. Para que no mute el objeto se va a modificar findAll del service.
      */
-    private ProductService service = new ProductService();
+    // private ProductServiceImpl service = new ProductServiceImpl();
+
+    @Autowired
+    private ProductServiceImpl service;
 
     @GetMapping
     public List<Product> list(){
