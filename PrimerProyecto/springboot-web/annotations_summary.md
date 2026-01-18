@@ -47,6 +47,20 @@ Este documento resume las anotaciones de Spring utilizadas en los controladores 
     *   **Uso**: Se utiliza en un método para indicar que su valor de retorno debe agregarse al modelo bajo un nombre específico. También se puede usar en un parámetro de método para vincular un objeto del modelo a la solicitud.
     *   **Ejemplo**: `@ModelAttribute("users") public List<User> userModel()` en [UserController.java](https://github.com/manu0120/cursoSpringBootUd/blob/master/PrimerProyecto/springboot-web/src/main/java/com/manuel/springboot/webapp/springboot_web/controllers/UserController.java)
 
+## Anotaciones de Inyección de Dependencias
+
+*   `@Autowired`:
+    *   **Uso**: Imagina que Spring es un almacén de herramientas (objetos). Con `@Autowired`, le dices: "Oye, necesito esta herramienta aquí". Spring la busca en su almacén y te la entrega ya lista para usar.
+    *   **¿Para qué sirve?**: Es la forma de conectar las piezas de tu aplicación. Por ejemplo, sirve para inyectar un **Service** dentro de un **Controller**, o un **Repository** dentro de un **Service**.
+    *   **Contextos de uso**:
+        *   **Campos**: Pones la anotación justo encima de la variable.
+        *   **Constructores**: (Lo más recomendado) Le pides la herramienta a Spring en el momento de crear la clase.
+    *   **Ejemplo práctico**:
+        ```java
+        @Autowired
+        private UsuarioService usuarioService; // Spring busca el servicio y lo pone aquí
+        ```
+
 ## Anotaciones de Propiedades
 
 *   `@Value("${propiedad.nombre}")`:
