@@ -4,19 +4,34 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.manuel.springboot.di.app.springboot_di.models.Product;
-import com.manuel.springboot.di.app.springboot_di.repositories.ProductRepositoryImpl;
+import com.manuel.springboot.di.app.springboot_di.repositories.ProductRepository; 
 
 /**
  * ProductService - El servicio accede a los datos a través del repositorio, y además trabaja con estos datos para realizar operaciones.
  */
-@Component
+@Service
 public class ProductServiceImpl implements ProductService {
     // private ProductRepositoryImpl repository = new ProductRepositoryImpl();
+    
     @Autowired
-    private ProductRepositoryImpl repository;
+    @Qualifier("productList")
+    private ProductRepository repository;
+    // con el constructor no hace falta el @Autowired
+    // public ProductServiceImpl(@Qualifier("productFoo") ProductRepository repository) {
+    //     this.repository = repository;
+    // }
+    
+    /*
+    @Autowired
+    public void setRepository(ProductRepository repository) {
+        this.repository = repository;
+    }
+    */
+
     @Override
     public List<Product> findAll() {
         // return this.repository.findAll().stream().map(p -> {
@@ -41,5 +56,4 @@ public class ProductServiceImpl implements ProductService {
     public Product findById(Long id) {
         return this.repository.findById(id);
     }
-    
 }
