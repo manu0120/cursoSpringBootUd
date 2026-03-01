@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.manuel.springboot.di.app.springboot_di.models.Product;
@@ -32,6 +33,9 @@ public class ProductServiceImpl implements ProductService {
     }
     */
 
+    @Value("${productTax}")
+    private int taxPercentage;
+
     @Override
     public List<Product> findAll() {
         // return this.repository.findAll().stream().map(p -> {
@@ -40,7 +44,10 @@ public class ProductServiceImpl implements ProductService {
         //     return p;
         // }).toList();
         return this.repository.findAll().stream().map(p -> {
-            Double priceImp = p.getPrice() * 1.25d;
+            // Double priceImp = p.getPrice() * 1.25d;
+            System.out.println("Precio antes de impuesto: " + p.getPrice());
+            Double priceImp = p.getPrice() * (taxPercentage / 100d + 1);
+            System.out.println("Precio con impuesto: " + priceImp);
             // se esta modificando el objeto Product, por lo que se va a mutar el precio original. Mejor clonar el objeto.
             // p.setPrice(priceImp.longValue());
 
@@ -50,6 +57,9 @@ public class ProductServiceImpl implements ProductService {
             Product newProd = (Product) p.clone();
             newProd.setPrice(priceImp.longValue());
             return newProd;
+            // Esto se usaba para explicar que se debe clonar el objeto para no mutar el original. Se evitaba esto con el uso de @RequestScope
+            // p.setPrice(priceImp.longValue());
+            // return p;
         }).collect(Collectors.toList());
     }
     @Override
