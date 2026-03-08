@@ -20,6 +20,7 @@ public class ProductServiceImpl implements ProductService {
     
     @Autowired
     @Qualifier("productList")
+    // @Qualifier("productRepositoryJson")
     private ProductRepository repository;
     // con el constructor no hace falta el @Autowired
     // public ProductServiceImpl(@Qualifier("productFoo") ProductRepository repository) {
@@ -48,6 +49,7 @@ public class ProductServiceImpl implements ProductService {
             System.out.println("Precio antes de impuesto: " + p.getPrice());
             Double priceImp = p.getPrice() * (taxPercentage / 100d + 1);
             System.out.println("Precio con impuesto: " + priceImp);
+            System.out.println("------------------------------");
             // se esta modificando el objeto Product, por lo que se va a mutar el precio original. Mejor clonar el objeto.
             // p.setPrice(priceImp.longValue());
 

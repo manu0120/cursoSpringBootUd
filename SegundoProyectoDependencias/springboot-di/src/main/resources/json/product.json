@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Teclado Mecanico",
+    "price": 95
+  },
+  {
+    "id": 2,
+    "name": "Raton Gaming",
+    "price": 49
+  },
+  {
+    "id": 3,
+    "name": "Monitor 27 Pulgadas",
+    "price": 320
+  },
+  {
+    "id": 4,
+    "name": "Portatil Ultrabook",
+    "price": 1250
+  },
+  {
+    "id": 5,
+    "name": "Auriculares Inalambricos",
+    "price": 129
+  },
+  {
+    "id": 6,
+    "name": "Silla Ergonomica",
+    "price": 210
+  }
+]
