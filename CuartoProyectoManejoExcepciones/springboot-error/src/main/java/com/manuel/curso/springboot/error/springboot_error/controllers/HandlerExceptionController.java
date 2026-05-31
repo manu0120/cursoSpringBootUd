@@ -1,15 +1,19 @@
 package com.manuel.curso.springboot.error.springboot_error.controllers;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.manuel.curso.springboot.error.springboot_error.models.Error;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class HandlerExceptionController {
     @ExceptionHandler(ArithmeticException.class)
     public ResponseEntity<Error> divisionByZero(Exception e) {
@@ -22,6 +26,28 @@ public class HandlerExceptionController {
         // return ResponseEntity.internalServerError().body(error);
         return ResponseEntity.status(500).body(error);
     }
+
+    @ExceptionHandler(NumberFormatException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> numberFormatEx(NumberFormatException e) {
+        Map<String, String> error= new HashMap<>();
+        error.put("error", "¡Error conversión de número!");
+        error.put("message", e.getMessage());
+        error.put("status", "400");
+        error.put("date", new Date().toString());
+        return error;
+    }
+    /* Forma más recomendada:
+
+    public ResponseEntity<Error> numberFormatEx(NumberFormatException e) {
+        Error error = new Error();
+        error.setError("¡Error conversión de número!");
+        error.setMessage(e.getMessage());
+        error.setStatus(400);
+        error.setDate(new Date());
+        return ResponseEntity.status(400).body(error);
+    }    
+    */
 
     @ExceptionHandler(NoHandlerFoundException.class)
     public ResponseEntity<Error> notFoundEx(NoHandlerFoundException e) {
