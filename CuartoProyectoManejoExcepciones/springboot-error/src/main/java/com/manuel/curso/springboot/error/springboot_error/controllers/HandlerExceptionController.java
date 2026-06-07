@@ -6,11 +6,13 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+import com.manuel.curso.springboot.error.springboot_error.exceptions.UserNotFoundException;
 import com.manuel.curso.springboot.error.springboot_error.models.Error;
 
 @RestControllerAdvice
@@ -32,6 +34,16 @@ public class HandlerExceptionController {
     public Map<String, String> numberFormatEx(NumberFormatException e) {
         Map<String, String> error= new HashMap<>();
         error.put("error", "¡Error conversión de número!");
+        error.put("message", e.getMessage());
+        error.put("status", "400");
+        error.put("date", new Date().toString());
+        return error;
+    }
+    @ExceptionHandler({NullPointerException.class, HttpMessageNotWritableException.class, UserNotFoundException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> userNotFoundEx(Exception e) {
+        Map<String, String> error= new HashMap<>();
+        error.put("error", "¡El usuario o rol no existe!");
         error.put("message", e.getMessage());
         error.put("status", "400");
         error.put("date", new Date().toString());
