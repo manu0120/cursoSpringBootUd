@@ -59,7 +59,6 @@ public class GreetingAspect {
             return result;
         } catch (Throwable e) {
             logger.error("Error en la llamada al método " + method + "()");
-            e.printStackTrace();
             throw e;
         }
     }
